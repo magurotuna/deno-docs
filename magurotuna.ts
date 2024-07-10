@@ -144,6 +144,6 @@ if (import.meta.main) {
   }
   console.log("================== Entries ==================");
   const enumeratedEntries = enumeratePaths(entries);
-  console.log("# of entries: ", enumeratedEntries);
+  console.log("# of entries: ", enumeratedEntries.length);
   console.table(JSON.stringify(enumeratedEntries, null, 2));
 }
