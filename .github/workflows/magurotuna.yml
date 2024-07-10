@@ -26,6 +26,9 @@ jobs:
       - name: "Reference: generate docs"
         working-directory: "reference_gen"
         run: deno task doc
+
+      - name: Build
+        run: deno task build
     
       - name: Collect assets to be uploaded
         run: deno run --allow-read magurotuna.ts
