@@ -23,6 +23,27 @@ type ManifestEntry =
   | ManifestEntryDirectory
   | ManifestEntrySymlink;
 
+function enumeratePaths(root: Record<string, ManifestEntry>): string[] {
+  const rec = (currentRoot: Record<string, ManifestEntry>, acc: string[]) => {
+    for (const [path, entry] of Object.entries(currentRoot)) {
+      switch (entry.kind) {
+        case "file":
+        case "symlink":
+          acc.push(path);
+          break;
+        case "directory":
+          acc.push(path);
+          rec(entry.entries, acc);
+          break;
+      }
+    }
+  };
+
+  const ret: string[] = [];
+  rec(root, ret);
+  return ret;
+}
+
 /** Calculate git object hash, like `git hash-object` does. */
 async function calculateGitSha1(bytes: Uint8Array) {
   const prefix = `blob ${bytes.byteLength}\0`;
@@ -122,6 +143,7 @@ if (import.meta.main) {
     console.log(JSON.stringify({ hash, path }));
   }
   console.log("================== Entries ==================");
-  console.log("# of entries: ", entries.length);
-  console.table(entries);
+  const enumeratedEntries = enumeratePaths(entries);
+  console.log("# of entries: ", enumeratedEntries);
+  console.table(JSON.stringify(enumeratedEntries, null, 2));
 }
