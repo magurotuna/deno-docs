@@ -117,7 +117,9 @@ if (import.meta.main) {
     exclude: [],
   });
   console.log("================== Assets ==================");
+  console.log("# of assets: ", assets.size);
+  console.table(assets);
   console.log(assets);
   console.log("================== Entries ==================");
-  console.log(entries);
+  console.table(entries);
 }
