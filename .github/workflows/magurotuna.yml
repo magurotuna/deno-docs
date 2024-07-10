@@ -1,4 +1,4 @@
-name: Deploy
+name: magurotuna
 on:
   push:
     branches: main
