@@ -118,8 +118,9 @@ if (import.meta.main) {
   });
   console.log("================== Assets ==================");
   console.log("# of assets: ", assets.size);
-  console.table(assets);
-  console.log(assets);
+  for (const [hash, path] of assets) {
+    console.log(JSON.stringify({ hash, path }));
+  }
   console.log("================== Entries ==================");
   console.log("# of entries: ", entries.length);
   console.table(entries);
