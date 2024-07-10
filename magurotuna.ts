@@ -121,5 +121,6 @@ if (import.meta.main) {
   console.table(assets);
   console.log(assets);
   console.log("================== Entries ==================");
+  console.log("# of entries: ", entries.length);
   console.table(entries);
 }
